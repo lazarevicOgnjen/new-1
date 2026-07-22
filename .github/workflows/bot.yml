@@ -34,26 +34,6 @@ jobs:
         env:
           email: ${{ secrets.EMAIL }}
           password: ${{ secrets.PASSWORD }}
-          oop: ${{ secrets.OOP }}
-          aip: ${{ secrets.AIP }}
-          uur: ${{ secrets.UUR }}
-          lp: ${{ secrets.LP }}
-          dmat: ${{ secrets.DMAT }}
-          pj: ${{ secrets.PJ }}
-          sp: ${{ secrets.SP }}
-          tg: ${{ secrets.TG }}
-          is: ${{ secrets.IS }}
-          os: ${{ secrets.OS }}
-          ps: ${{ secrets.PS }}
-          rm: ${{ secrets.RM }}
-          rmas: ${{ secrets.RMAS }}
-          si: ${{ secrets.SI }}
-          ti: ${{ secrets.TI }}
-          oet1: ${{ secrets.OET1 }}
-          oet2: ${{ secrets.OET2 }}
-          fizika: ${{ secrets.FIZIKA }}
-          sip: ${{ secrets.SIP }}
-          csMainForum: ${{ secrets.CSMAINFORUM }}
         run: python main.py
 
 
