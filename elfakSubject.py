@@ -1,8 +1,8 @@
-pagesList = {
+elfakSubjectList = {
 
   "sip" : {
-  "url" : "https://sip.elfak.ni.ac.rs/",
-  "xpath" : "/html/body/section[1]/div/div/div[1]/ul/li[1]/p[1]"
+    "url" : "https://sip.elfak.ni.ac.rs/",
+    "xpath" : "/html/body/section[1]/div/div/div[1]/ul/li[1]/p[1]"
   },
 
   "aip" : {
