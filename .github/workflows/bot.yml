@@ -1,0 +1,65 @@
+name: bot
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repo
+        uses: actions/checkout@v4
+
+      - name: py
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: libraries
+        run: pip install playwright discord.py
+
+      - name: playwright
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/cache.txt') }}
+
+      - name: chromium
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: playwright install chromium
+
+      - name: scrapping
+        env:
+          email: ${{ secrets.EMAIL }}
+          password: ${{ secrets.PASSWORD }}
+          oop: ${{ secrets.OOP }}
+          aip: ${{ secrets.AIP }}
+          uur: ${{ secrets.UUR }}
+          lp: ${{ secrets.LP }}
+          dmat: ${{ secrets.DMAT }}
+          pj: ${{ secrets.PJ }}
+          sp: ${{ secrets.SP }}
+          tg: ${{ secrets.TG }}
+          is: ${{ secrets.IS }}
+          os: ${{ secrets.OS }}
+          ps: ${{ secrets.PS }}
+          rm: ${{ secrets.RM }}
+          rmas: ${{ secrets.RMAS }}
+          si: ${{ secrets.SI }}
+          ti: ${{ secrets.TI }}
+          oet1: ${{ secrets.OET1 }}
+          oet2: ${{ secrets.OET2 }}
+          fizika: ${{ secrets.FIZIKA }}
+          sip: ${{ secrets.SIP }}
+          csMainForum: ${{ secrets.CSMAINFORUM }}
+        run: python main.py
+
+
+      - name: save changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add *.md
+          git diff --quiet && git diff --staged --quiet || (git commit -m "update" && git push)
