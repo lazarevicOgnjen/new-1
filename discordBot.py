@@ -1,7 +1,7 @@
 import os, sys, discord
 
 client = discord.Client(intents=discord.Intents.default())
-kanal_id, forum_url, token = sys.argv[1], sys.argv[2], os.environ["DISCORD_BOT_TOKEN"]
+kanal_id, forum_url, slika_path, token = sys.argv[1], sys.argv[2], sys.argv[3], os.environ["DISCORD_BOT_TOKEN"]
 
 @client.event
 async def on_ready():
@@ -11,7 +11,8 @@ async def on_ready():
     view = discord.ui.View()
     view.add_item(discord.ui.Button(label="Otvori forum", url=forum_url))
     
-    await ch.send("Forum je ažuriran !", view=view)
+    file = discord.File(slika_path)
+    await ch.send("Forum je ažuriran !", file=file, view=view)
     await client.close()
 
 client.run(token)
