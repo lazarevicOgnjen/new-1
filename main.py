@@ -1,4 +1,5 @@
 import os
+import subprocess
 from playwright.sync_api import sync_playwright, Error
 from elfakPages import pagesList
 
@@ -44,7 +45,13 @@ for pageName, info in pagesList.items():
                 f.truncate(0)
                 f.write(page_content)
                 print(f"{pageName}.md is updated !!!")
-                page.screenshot(path=f"{pageName}.png")             
+                page.screenshot(path=f"{pageName}.png") 
+                subprocess.run([
+                    "python", "discordBot.py", 
+                    str(info['id']), 
+                    info['url'], 
+                    f"{pageName}.png"
+                ])
     except Error as e:
         print(f"{pageName} : {e}")
         continue
